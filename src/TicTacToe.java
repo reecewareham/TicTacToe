@@ -2,6 +2,12 @@ import java.util.*;
 
 public class TicTacToe {
 
+    public static char [] [] cleanGameBoard = {{' ', '|', ' ', '|', ' '},
+            {'-', '+', '-', '+', '-'},
+            {' ', '|', ' ', '|', ' '},
+            {'-', '+', '-', '+', '-'},
+            {' ', '|', ' ', '|', ' '}};
+
     public static char [] [] gameBoard = {{' ', '|', ' ', '|', ' '},
             {'-', '+', '-', '+', '-'},
             {' ', '|', ' ', '|', ' '},
@@ -11,14 +17,8 @@ public class TicTacToe {
     static ArrayList<Integer> playerPositions = new ArrayList<Integer>();
     static ArrayList<Integer> botPositions = new ArrayList<Integer>();
 
-
-    public static void main(String[] args) {
-
-        startGame();
-
-
-
-    }
+    public static int playerWins = 0;
+    public static int botWins = 0;
 
     public static void printBoard(char [] [] gameBoard) {
 
@@ -98,10 +98,15 @@ public class TicTacToe {
 
         for(List l : winningPositions) {
             if (playerPositions.containsAll(l)) {
+                playerWins++;
+                gameBoard = cleanGameBoard;
                 return "Player Wins";
             } else if (botPositions.containsAll(l)) {
+                botWins++;
+                gameBoard = cleanGameBoard;
                 return "Bot Wins";
             } else if (playerPositions.size() + botPositions.size() == 9) {
+                gameBoard = cleanGameBoard;
                 return "Tie Game";
             }
         }
